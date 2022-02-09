@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "env": {
+    "commonjs": true,
+    "es2021": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "airbnb"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "plugins": ["jest"],
+  "rules": {
+    "quotes": [2, "single", {
+      "avoidEscape": true
+    }],
+    "no-underscore-dangle": "off",
+    "max-len": "warn",
+    "no-new": "warn",
+    "class-methods-use-this": "warn"
+  }
+}

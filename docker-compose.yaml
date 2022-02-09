@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  pedro-mognon-project-api:
+    container_name: pedro-mognon-project-api
+    hostname: pedro-mognon-project-api
+    image: pedro-mognon-project-api:latest
+    build:
+      context: ./
+      target: development
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    command: ['npm', 'start']
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: development
+      MONGO_URL: mongodb://root:123456@mongo:27017/pedro-mognon-project?authSource=admin
+    networks:
+      - pedro-mognon-project-network
+
+  pedro-mognon-project-mongodb:
+    container_name: pedro-mognon-project-mongodb
+    hostname: mongo
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_DATABASE: pedro-mognon-project
+    ports:
+      - '27017:27017'
+    volumes:
+      - database:/data/db
+    networks:
+      - pedro-mognon-project-network
+
+volumes:
+  node_modules:
+  database:
+
+networks:
+  pedro-mognon-project-network:
+    driver: bridge
