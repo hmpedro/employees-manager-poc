@@ -1,10 +1,10 @@
 version: '3.9'
 
 services:
-  pedro-mognon-project-api:
-    container_name: pedro-mognon-project-api
-    hostname: pedro-mognon-project-api
-    image: pedro-mognon-project-api:latest
+  employee-manager-poc-api:
+    container_name: employee-manager-poc-api
+    hostname: employee-manager-poc-api
+    image: employee-manager-poc-api:latest
     build:
       context: ./
       target: development
@@ -16,29 +16,29 @@ services:
       - '3000:3000'
     environment:
       NODE_ENV: development
-      MONGO_URL: mongodb://root:123456@mongo:27017/pedro-mognon-project?authSource=admin
+      MONGO_URL: mongodb://root:123456@mongo:27017/employee-manager-poc?authSource=admin
     networks:
-      - pedro-mognon-project-network
+      - employee-manager-poc-network
 
-  pedro-mognon-project-mongodb:
-    container_name: pedro-mognon-project-mongodb
+  employee-manager-poc-mongodb:
+    container_name: employee-manager-poc-mongodb
     hostname: mongo
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456
-      MONGO_INITDB_DATABASE: pedro-mognon-project
+      MONGO_INITDB_DATABASE: employee-manager-poc
     ports:
       - '27017:27017'
     volumes:
       - database:/data/db
     networks:
-      - pedro-mognon-project-network
+      - employee-manager-poc-network
 
 volumes:
   node_modules:
   database:
 
 networks:
-  pedro-mognon-project-network:
+  employee-manager-poc-network:
     driver: bridge
